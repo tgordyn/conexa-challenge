@@ -12,7 +12,7 @@ const RightTitle = ({ nextPageClick, isNextPageDisabled }) => {
       >
         +
       </button>
-      <h2 className="text-2xl font-semibold  m-2 text-Gunmetal/2 mr-2">
+      <h2 className="text-xl font-semibold  m-2 text-Gunmetal/2 mr-2">
         Character #2
       </h2>
     </div>
