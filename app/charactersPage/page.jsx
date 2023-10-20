@@ -10,7 +10,6 @@ import LeftTitle from "@/app/components/HeaderBtns/LeftTitle";
 import RightTitle from "@/app/components/HeaderBtns/RightTitle";
 import { divideCharacters } from "./divideCharacters";
 
-
 function CharacterPage() {
   const [characters, setCharacters] = useState([]);
   const [idLeft, setIdLeft] = useState(null);
@@ -19,10 +18,8 @@ function CharacterPage() {
   const [maxPages, setMaxPages] = useState(0);
   const router = useRouter();
   const searchParams = useSearchParams();
-  const page = searchParams.get("page");
+  const page = searchParams.get("page") || 1;
   const { charactersLeft, charactersRight } = divideCharacters(characters);
-
- 
 
   const handleNextPage = () => {
     router.push(`?page=${parseInt(page) + 1}`);
@@ -55,7 +52,6 @@ function CharacterPage() {
     setIdRight(characterId);
   };
 
-
   useEffect(() => {
     const fetchCharacters = async () => {
       try {
@@ -79,7 +75,6 @@ function CharacterPage() {
       fetchCoincidenceData();
     }
   }, [idLeft, idRight]);
-
 
   return (
     <div className="min-h-screen w-full flex flex-col">
@@ -107,9 +102,8 @@ function CharacterPage() {
           />
         </div>
       </div>
-      
+
       <CharacterComparisonResults episodes={episodes} />
-      
     </div>
   );
 }
