@@ -5,10 +5,9 @@ import { Loading } from "notiflix/build/notiflix-loading-aio";
 import CharacterList from "../components/CharacterList/CharacterList";
 import { compareEpisodes } from "../api/compareEpisodes";
 import { getMoreCharacters } from "../api/getMoreCharacters";
-import CharacterComparisonResults from "../components/CharacterComparisonResults/CharacterComparisonResults";
-import LeftTitle from "@/app/components/HeaderBtns/LeftTitle";
-import RightTitle from "@/app/components/HeaderBtns/RightTitle";
+import CharacterComparisonResults from "../components/CharacterComparisonResults/Index";
 import { divideCharacters } from "./divideCharacters";
+import HeaderBtn from "../components/HeaderBtns/HeaderBtns";
 
 function CharacterPage() {
   const [characters, setCharacters] = useState([]);
@@ -80,9 +79,12 @@ function CharacterPage() {
     <div className="min-h-screen w-full flex flex-col">
       <div className="md:h-3/4 flex flex-col bg-Isabelline pb-6 md:flex-row ">
         <div className="w-full md:w-1/2 p-4">
-          <LeftTitle
-            onPreviousPageClick={handlePreviousPage}
-            isPreviousPageDisabled={page == 1}
+          <HeaderBtn
+            buttonAction={handlePreviousPage}
+            isButtonDisabled={page == 1}
+            titleText="Character #1"
+            buttonText="-"
+            textAlignment="left"
           />
           <CharacterList
             characters={charactersLeft}
@@ -91,9 +93,12 @@ function CharacterPage() {
           />
         </div>
         <div className="w-full md:w-1/2 p-4">
-          <RightTitle
-            nextPageClick={handleNextPage}
-            isNextPageDisabled={page == maxPages}
+          <HeaderBtn
+            buttonAction={handleNextPage}
+            isButtonDisabled={page == maxPages}
+            titleText="Character #2"
+            buttonText="+"
+            textAlignment="right"
           />
           <CharacterList
             characters={charactersRight}
