@@ -75,6 +75,29 @@ function CharacterPage() {
     }
   }, [idLeft, idRight]);
 
+  window.addEventListener("beforeunload", () => {
+    const storedData = {
+      idLeft,
+      idRight,
+      episodes,
+    };
+    localStorage.setItem("myAppData", JSON.stringify(storedData));
+  });
+
+  useEffect(() => {
+    // Persistir data al refrescar la pagina
+    const storedData = localStorage.getItem("myAppData");
+    if (storedData) {
+      const parsedData = JSON.parse(storedData);
+
+      setIdLeft(parsedData.idLeft);
+      setIdRight(parsedData.idRight);
+      setEpisodes(parsedData.episodes);
+
+      localStorage.removeItem("myAppData");
+    }
+  }, []);
+
   return (
     <div className="min-h-screen w-full flex flex-col">
       <div className="md:h-3/4 flex flex-col bg-Isabelline pb-6 md:flex-row ">
@@ -107,7 +130,6 @@ function CharacterPage() {
           />
         </div>
       </div>
-
       <CharacterComparisonResults episodes={episodes} />
     </div>
   );
