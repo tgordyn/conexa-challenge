@@ -75,14 +75,16 @@ function CharacterPage() {
     }
   }, [idLeft, idRight]);
 
-  window.addEventListener("beforeunload", () => {
-    const storedData = {
-      idLeft,
-      idRight,
-      episodes,
-    };
-    localStorage.setItem("myAppData", JSON.stringify(storedData));
-  });
+  if (typeof window !== 'undefined') {
+    window.addEventListener('beforeunload', () => {
+      const storedData = {
+        idLeft,
+        idRight,
+        episodes,
+      };
+      localStorage.setItem('myAppData', JSON.stringify(storedData));
+    });
+  }
 
   useEffect(() => {
     // Persistir data al refrescar la pagina
